@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import { StyleSheet,FlatList,View, StatusBar } from 'react-native';
 import { Actions, Scene, Router } from 'react-native-router-flux';
 
-import CharactersList from 'Marvel/src/sections/characters/CharactersList'
+import CharactersList from 'Marvel/src/sections/characters/charactersList/Container'
 import * as WebServices from 'Marvel/src/webServices/WebServices'
 
 /*** REDUX ***/

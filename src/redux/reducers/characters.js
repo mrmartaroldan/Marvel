@@ -1,4 +1,4 @@
-import * as types from '../types/characters'
+import * as types from '../types/Characters'
 
 const initialState = {
     isFetching: false,
@@ -12,8 +12,20 @@ export default function reducer(state = initialState, action = {}) {
         case types.CHARACTERS_UPDATE_LIST:
             return {
                 ...state,
-                list: action.value
+                list: action.list
             };
+
+        case types.UPDATE_CHARACTER_SELECTED:
+            return {
+                ...state,
+                item: action.character
+            };
+
+        case types.CHARACTER_SET_FETCHING:
+            return {
+                ...state,
+                isFetching: action.value 
+            }
 
         default:
             return state;

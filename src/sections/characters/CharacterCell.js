@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 
-export default class CharacterCell extends Component {
+export default class characterCell extends Component {
 
     static defaultProps = {
          onSelect   : () => {},
