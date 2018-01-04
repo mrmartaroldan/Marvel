@@ -1,27 +1,24 @@
 import React, { Component } from 'react'
 import { View, FlatList, Text, Button, StyleSheet, TouchableOpacity } from 'react-native'
-import { AsyncCalls } from 'Marvel/src/commons'
-import { fetch } from 'Marvel/src/webServices/WebServices'
-import { fetchAlter, fetchHouses, fetchCharacters } from '../../webServices/WebServices';
+import { fetchCharacters } from '../../webServices/WebServices';
 import CharacterCell from 'Marvel/src/sections/characters/CharacterCell';
 import * as Constants from 'Marvel/src/webServices/Constants'
 
-export default class CharactersList extends Component {
+/** REDUX **/
+import { connect } from 'react-redux'
+import * as CharactersActions from 'Marvel/src/redux/actions/characters'
+
+class CharactersList extends Component {
 
     constructor(props){
         super(props)
         this.state = {
-            list: [],
             selected: null,
         }
     }
 
     componentWillMount(){
-        fetchCharacters().then( (response) => {
-            this.setState({ list: response.data.results })
-        }).catch( error => {
-            console.log("error: ", error)
-        })
+        this.props.fetchCharactersList()
     }
 
     onSelect(character) {
@@ -42,7 +39,7 @@ export default class CharactersList extends Component {
         return (
             <View style={ styles.container }>
                 <FlatList
-                    data={ this.state.list }
+                    data={ this.props.list }
                     renderItem={ ({ item, index }) => this.renderCell(item, index) }
                     keyExtractor={ (item, index) => item.id }
                     extraData={ this.state }
@@ -51,6 +48,23 @@ export default class CharactersList extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return{
+        list: state.characters.list
+    }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        fetchCharactersList: () => {
+            dispatch(CharactersActions.fetchCharactersList())
+        },
+    }
+}
+
+
+export default connect (mapStateToProps,mapDispatchToProps)(CharactersList)
 
 const styles = StyleSheet.create({
 
