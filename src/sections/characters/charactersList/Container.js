@@ -19,6 +19,7 @@ const mapDispatchToProps = (dispatch, props) => {
 
         updateSelectedCharacters: (character) => {
             dispatch(CharactersActions.updateCharacterSelected(character))
+            Actions.CharacterDetail({ title: character.name })
         },
 
     }

@@ -7,9 +7,14 @@
 import React, { Component } from 'react';
 import { StyleSheet,FlatList,View, StatusBar } from 'react-native';
 import { Actions, Scene, Router } from 'react-native-router-flux';
-
-import CharactersList from 'Marvel/src/sections/characters/charactersList/Container'
 import * as WebServices from 'Marvel/src/webServices/WebServices'
+import { Colors } from 'Marvel/src/commons'
+
+
+/*** COMPONENTS */
+import CharactersList from 'Marvel/src/sections/characters/charactersList/Container'
+import CharacterDetail from 'Marvel/src/sections/characters/characterDetail/Container'
+/***********/
 
 /*** REDUX ***/
 import { createStore, applyMiddleware, combineReducers } from 'redux'
@@ -40,8 +45,19 @@ export default class App extends Component {
               <Scene
                 key={ 'CharactersList' }
                 component={ CharactersList }
+                hideNavBar
               />
+
+            <Scene
+              key={ 'CharacterDetail' }
+              component={ CharacterDetail }
+              navigationBarStyle={styles.navBar}
+              navBarButtonColor={Colors.blue}
+            />
+
             </Scene>
+
+            
           </Router>
         </Provider>
         
@@ -52,5 +68,9 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
 
+  },
+
+  navBar: {
+    backgroundColor: Colors.red
   }
 });
